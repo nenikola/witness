@@ -3,6 +3,7 @@ import { CreateReportDTO } from '../entities/dto/createReport.dto';
 import CustomError from '../errors/customError';
 import Request from './request';
 import Response from './response';
+import { logger } from '../../utils/logger';
 
 export default class ReportController {
   async postReport(request: Request): Promise<Response> {
@@ -14,12 +15,11 @@ export default class ReportController {
 
     try {
       await reportService.addReport(reportInfo);
-
       return {
         statusCode: 201,
       };
     } catch (error) {
-      console.error(error);
+      logger.error(error);
       if (error instanceof CustomError) {
         return {
           statusCode: error.statusCode,
