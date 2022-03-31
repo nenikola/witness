@@ -1,4 +1,5 @@
 node_modules
 filestore
 dist
+logs
 .env
